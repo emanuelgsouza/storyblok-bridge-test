@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title> StoryBlok - Test Page for Storyblok Bridge </title>
+ 
+  <script type="text/javascript" src="https://unpkg.com/vue@2.1.10/dist/vue.min.js"></script>
+
+  <!-- Usage the storyblok-vue plugin -->
+  <!-- https://github.com/storyblok/storyblok-vue -->
+  <script type="text/javascript" src="https://unpkg.com/storyblok-vue@1.0.2/storyblok-vue.js"></script>
+
+  <!-- getting the bridge v1 -->
+  <script src="//app.storyblok.com/f/storyblok-latest.js" type="text/javascript">
+  </script>
+
+  <!-- getting the bridge v2 -->
+  <script src="//app.storyblok.com/f/storyblok-v2-latest.js" type="text/javascript">
+  </script>
+
+  <!-- Using the StoryblokJSClient inside the browser -->
+  <!-- https://github.com/storyblok/storyblok-js-client#using-from-the-browser-directly -->
+  <script src="https://cdn.jsdelivr.net/npm/storyblok-js-client@3.1.0/dist/index.standalone.js"></script>
+
+  <!-- minimum styles -->
+  <style>
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .app {
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    .teaser,
+    .column,
+    .message {
+      background: #ebeff2;
+      border-radius: 10px;
+      font-size: 2rem;
+      line-height: 3;
+      margin: 10px 5px;
+      text-align: center;
+    }
+
+    .feature {
+      height: 100%;
+      width: 100%;
+    }
+
+    .grid {
+      display: flex;
+    }
+
+    .column {
+      flex: 1;
+    }
+
+    .message {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div id="root">
+      <p>Open the <code>storyblok-bridge-example</code> story or <code>storyblok-bridge-global</code> </p>
+
+      <h1>Content from Storyblok Bridge Example story</h1>
+
+      <div>
+        <component
+          :is="story.content.component"
+          :blok="story.content"
+        />
+      </div>
+
+      <hr>
+
+      <h1>Content from Storyblok Bridge Global story</h1>
+      <div>
+        <component
+          :is="global.content.component"
+          :blok="global.content"
+        />
+      </div>
+
+      <button @click="ping">
+        Do Ping
+      </button>
+
+      <message :payload-event="payloadEvent" />
+    </div>
+  </div>
+
+  <!-- importing the example application code -->
+  <!-- Don't use the both approaches in the same time -->
+
+  <!-- importing the example that uses bridge v2 -->
+  <script type="module" src="./index.js"></script>
+
+  <!-- importing the example that uses bridge v1 -->
+  <!-- <script type="module" src="./index.v1.js"></script> -->
+</body>
+</html>
