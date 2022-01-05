@@ -86,7 +86,13 @@ function setup() {
     props: ['blok'],
     template: `
       <div v-editable="blok" class="global" data-testid="global">
-        <p> {{ blok.title }} </p>
+        <h2>{{ blok.title }}</h2>
+        <component
+          v-for="bodyBlok in blok.body"
+          :key="bodyBlok._uid"
+          :blok="bodyBlok"
+          :is="bodyBlok.component"
+        />
       </div>
     `,
   })
@@ -114,7 +120,7 @@ function setup() {
     mounted() {
       window.storyblok.init({
         accessToken: import.meta.env.VITE_STORYBLOK_ACCESS_TOKEN,
-        customParent: 'http://localhost:3300',
+        // customParent: 'http://localhost:3300',
       })
 
       window.storyblok.on('input', (payload) => {
